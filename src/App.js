@@ -5,7 +5,6 @@ import Section from "./components/Section";
 import Svg from "./components/Svg";
 
 function App() {
-  const [showBothSections, setShowBothSections] = useState(false);
   const [totalPages, setTotalPages] = useState(5);
   const [selectedCharacter, setSelectedCharacter] = useState();
   const [planet, setPlanet] = useState();
@@ -48,7 +47,7 @@ function App() {
     }
 
     e.target.classList.add("active");
-    const character = list.find((el) => el.name == e.target.innerText);
+    const character = list.find((el) => el.name === e.target.innerText);
     setSelectedCharacter(character);
     renderPlanet(character.homeworld);
   };

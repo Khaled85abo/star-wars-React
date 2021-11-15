@@ -1,5 +1,4 @@
 import React from "react";
-import RangeInput from "./sub-components/RangeInput";
 import SvgSpinner from "./sub-components/SvgSpinner";
 
 const Section = (props) => {
@@ -20,7 +19,7 @@ const Section = (props) => {
         ))}
       </ul>
       <div class="page-controller">
-        <button class="back-btn" onClick={previousPage} disabled={page == 1}>
+        <button class="back-btn" onClick={previousPage} disabled={page === 1}>
           ◀
         </button>
         <span>{page}</span>
@@ -29,7 +28,7 @@ const Section = (props) => {
         <button
           class="forward-btn"
           onClick={nextPage}
-          disabled={page == totalPages}
+          disabled={page === totalPages}
         >
           ▶
         </button>
