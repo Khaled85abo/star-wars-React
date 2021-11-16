@@ -13,7 +13,6 @@ const Aside = (props) => {
       <div class="character-details">
         {character && <CharArticle character={character} />}
       </div>
-
       <section class="extra-info">
         <div class="btns">
           <input
