@@ -1,9 +1,16 @@
 import React from "react";
 import SvgSpinner from "./sub-components/SvgSpinner";
-
-const Section = (props) => {
-  const { list, totalPages, page, nextPage, previousPage, renderCharacter } =
-    props;
+import { useStateContext } from "../contexts/StateContext";
+const Section = () => {
+  const {
+    list,
+    totalPages,
+    page,
+    nextPage,
+    previousPage,
+    renderCharacter,
+    loading,
+  } = useStateContext();
   return (
     <section class="characters">
       <p>Characters</p>
@@ -19,7 +26,11 @@ const Section = (props) => {
         ))}
       </ul>
       <div class="page-controller">
-        <button class="back-btn" onClick={previousPage} disabled={page === 1}>
+        <button
+          class="back-btn"
+          onClick={previousPage}
+          disabled={page === 1 || loading}
+        >
           ◀
         </button>
         <span>{page}</span>
@@ -28,7 +39,7 @@ const Section = (props) => {
         <button
           class="forward-btn"
           onClick={nextPage}
-          disabled={page === totalPages}
+          disabled={page === totalPages || loading}
         >
           ▶
         </button>

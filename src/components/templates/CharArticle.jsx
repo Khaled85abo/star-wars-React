@@ -1,5 +1,4 @@
 export default function CharArticle(props) {
-  console.log(props);
   const {
     name,
     height,

@@ -2,16 +2,17 @@ import React from "react";
 import SvgSpinner from "./sub-components/SvgSpinner";
 import Planet from "./templates/Planet";
 import CharArticle from "./templates/CharArticle";
-const Aside = (props) => {
-  const { character, planet } = props;
+import { useStateContext } from "../contexts/StateContext";
+const Aside = () => {
+  const { selectedCharacter, planet } = useStateContext();
   return (
     <aside>
       <p>Details</p>
       <div class="spinner-div hidden details">
         <SvgSpinner />
       </div>
-      <div class="character-details">
-        {character && <CharArticle character={character} />}
+      <div class="selectedCharacter-details">
+        {selectedCharacter && <CharArticle character={selectedCharacter} />}
       </div>
 
       <section class="extra-info">
