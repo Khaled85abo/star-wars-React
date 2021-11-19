@@ -14,7 +14,6 @@ const Aside = () => {
       <div class="selectedCharacter-details">
         {selectedCharacter && <CharArticle character={selectedCharacter} />}
       </div>
-
       <section class="extra-info">
         <div class="btns">
           <input
