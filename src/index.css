@@ -17,7 +17,9 @@ body {
   font-family: "Ropa Sans", sans-serif;
   background-color: var(--light-gray);
 }
-
+button {
+  cursor: pointer;
+}
 .wrapper {
   max-width: 900px;
   margin: auto;
@@ -50,6 +52,7 @@ header > p {
   position: relative;
   padding: 0.5rem;
   animation: slide-up 0.4s ease;
+  cursor: pointer;
 }
 
 @keyframes fase {
@@ -186,16 +189,17 @@ aside > article {
 }
 
 .btns label {
+  cursor: pointer;
   font-size: 1rem;
   background-color: var(--lighter-gray);
   padding: 0.4rem 0.6rem;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
 }
-.btns input[type="radio"]:checked + label {
+/* .btns input[type="radio"]:checked + label {
   background-color: var(--gray);
   color: var(--yellow);
-}
+} */
 
 .article {
   background-color: var(--gray);

@@ -1,9 +1,12 @@
-import { useEffect, useReducer } from "react";
-import Aside from "./components/Aside";
+import React, { useEffect, Suspense } from "react";
+// import Aside from "./components/Aside";
 import Header from "./components/Header";
 import Section from "./components/Section";
 import Svg from "./components/Svg";
 import { useStateContext } from "./contexts/StateContext";
+// Lazy loading https://reactjs.org/docs/code-splitting.html
+const Aside = React.lazy(() => import("./components/Aside"));
+
 function App() {
   const { fetchCharacters } = useStateContext();
 
@@ -18,7 +21,9 @@ function App() {
         <div class="container">
           <Svg />
           <Section />
-          <Aside />
+          <Suspense fallback={<div>...Loading</div>}>
+            <Aside />
+          </Suspense>
         </div>
       </div>
     </body>

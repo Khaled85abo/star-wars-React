@@ -1,10 +1,28 @@
-import React from "react";
-import SvgSpinner from "./sub-components/SvgSpinner";
-import Planet from "./templates/Planet";
-import CharArticle from "./templates/CharArticle";
+import { useState } from "react";
 import { useStateContext } from "../contexts/StateContext";
+import SvgSpinner from "./sub-components/SvgSpinner";
+import PlanetTempate from "./templates/PlanetTemplate";
+import CharacterTemplate from "./templates/CharacterTemplate";
+import ExtraInfoBtns from "./ExtraInfoBtns";
+import VehiclesTemplate from "./templates/VehiclesTemplate";
+import StarshipsTemplate from "./templates/StarshipsTemplate";
+import SpeciesTemplate from "./templates/SpeciesTemplate";
+
 const Aside = () => {
-  const { selectedCharacter, planet } = useStateContext();
+  const {
+    selectedCharacter,
+    planet,
+    vehiclesArray,
+    starshipsArray,
+    speciesArray,
+    renderExtraInfo,
+  } = useStateContext();
+  const [extraInfoType, setExtraInfoType] = useState("planet");
+  const handleExtraInfoBtn = (type) => {
+    setExtraInfoType(type);
+    renderExtraInfo(type);
+  };
+
   return (
     <aside>
       <p>Details</p>
@@ -12,57 +30,30 @@ const Aside = () => {
         <SvgSpinner />
       </div>
       <div class="selectedCharacter-details">
-        {selectedCharacter && <CharArticle character={selectedCharacter} />}
+        {selectedCharacter && (
+          <CharacterTemplate character={selectedCharacter} />
+        )}
       </div>
       <section class="extra-info">
-        <div class="btns">
-          <input
-            type="radio"
-            id="radio-1"
-            name="tabs"
-            data-type="planet"
-            checked
-            onClick={(e) => console.log(e.target.dataset.type)}
-          />
-          <label for="radio-1" class="tab">
-            Planet
-          </label>
-          <input
-            type="radio"
-            id="radio-2"
-            name="tabs"
-            data-type="species"
-            onClick={(e) => console.log(e.target.dataset.type)}
-          />
-          <label for="radio-2" class="tab">
-            Species
-          </label>
-          <input
-            type="radio"
-            id="radio-3"
-            name="tabs"
-            data-type="vehicles"
-            onClick={(e) => console.log(e.target.dataset.type)}
-          />
-          <label for="radio-3" class="tab">
-            Vehicles
-          </label>
-          <input
-            type="radio"
-            id="radio-4"
-            name="tabs"
-            data-type="starships"
-            onClick={(e) => console.log(e.target.dataset.type)}
-          />
-          <label for="radio-4" class="tab">
-            Starships
-          </label>
-        </div>
+        <ExtraInfoBtns
+          handleExtraInfoBtn={handleExtraInfoBtn}
+          extraInfoType={extraInfoType}
+        />
 
         <div class="spinner-div hidden extraInfo">
           <SvgSpinner />
         </div>
-        <div class="article">{planet && <Planet planet={planet} />}</div>
+        <div class="article">
+          {extraInfoType == "planet" && planet ? (
+            <PlanetTempate planet={planet} />
+          ) : extraInfoType == "vehicles" && vehiclesArray.length > 0 ? (
+            <VehiclesTemplate />
+          ) : extraInfoType == "starships" && starshipsArray.length > 0 ? (
+            <StarshipsTemplate />
+          ) : (
+            speciesArray.length > 0 && <SpeciesTemplate />
+          )}
+        </div>
       </section>
     </aside>
   );
